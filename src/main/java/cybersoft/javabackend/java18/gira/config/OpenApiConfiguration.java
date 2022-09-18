@@ -21,7 +21,7 @@ public class OpenApiConfiguration {
                         .title("Gira Application")
                         .description("Service for Education Purpose")
                         .version("v1.0")
-                        .license(new License().name("NO LICENSE").url("https://github.com/"))
+                        .license(new License().name("NO LICENSE").url("https://github.com/nguyennghia0479"))
                         .contact(new Contact()
                                 .email("nguyennghia0479@gmail.com")
                                 .name("Nguyen Trong Nghia")
