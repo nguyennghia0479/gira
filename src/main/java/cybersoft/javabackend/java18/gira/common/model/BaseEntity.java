@@ -1,7 +1,7 @@
 package cybersoft.javabackend.java18.gira.common.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import cybersoft.javabackend.java18.gira.common.util.DateTimeUtil;
+import cybersoft.javabackend.java18.gira.common.util.DateTimeUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,8 +42,8 @@ public class BaseEntity implements Serializable {
     @Column(name = Columns.CREATED_BY)
     protected String createdBy;
 
-    @DateTimeFormat(pattern = DateTimeUtil.DATETIME_FORMAT)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeUtil.DATETIME_FORMAT)
+    @DateTimeFormat(pattern = DateTimeUtils.DATETIME_FORMAT)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeUtils.DATETIME_FORMAT)
     @CreatedDate
     @Column(name = Columns.CREATED_AT)
     protected LocalDateTime createdAt;
@@ -52,11 +52,17 @@ public class BaseEntity implements Serializable {
     @Column(name = Columns.LAST_MODIFIED_BY)
     protected String lastModifiedBy;
 
-    @DateTimeFormat(pattern = DateTimeUtil.DATETIME_FORMAT)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeUtil.DATETIME_FORMAT)
+    @DateTimeFormat(pattern = DateTimeUtils.DATETIME_FORMAT)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeUtils.DATETIME_FORMAT)
     @LastModifiedDate
     @Column(name = Columns.LAST_MODIFIED_AT)
     protected LocalDateTime lastModifiedAt;
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.id.equals(((BaseEntity) obj).id);
+    }
+
 
     @UtilityClass
     static class Columns {
