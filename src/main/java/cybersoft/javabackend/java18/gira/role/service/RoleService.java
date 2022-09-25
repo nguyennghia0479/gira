@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface RoleService extends GenericService<Role, RoleDTO, UUID> {
@@ -17,6 +18,8 @@ public interface RoleService extends GenericService<Role, RoleDTO, UUID> {
     Role update(Role role, String code);
 
     void delete(String code);
+
+    RoleDTO save(RoleDTO dto);
 }
 
 @Service
@@ -33,15 +36,26 @@ class RoleServiceImpl implements RoleService {
 
     @Override
     public Role update(Role role, String code) {
-        Role curRole = repository.findByCode(code);
-        curRole.setName(role.getName());
-        curRole.setDescription(role.getDescription());
-        return repository.save(curRole);
+        Optional<Role> optRole = repository.findByCode(code);
+        if (optRole.isPresent()) {
+            Role curRole = optRole.get();
+            curRole.setName(role.getName());
+            curRole.setDescription(role.getDescription());
+            return repository.save(curRole);
+        }
+        return null;
     }
 
     @Override
     public void delete(String code) {
         repository.deleteByCode(code);
+    }
+
+    @Override
+    public RoleDTO save(RoleDTO dto) {
+        Role model = mapper.map(dto, Role.class);
+        Role saveModel = repository.save(model);
+        return mapper.map(saveModel, RoleDTO.class);
     }
 
     @Override
