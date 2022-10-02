@@ -21,16 +21,20 @@ public interface GenericService<T extends BaseEntity, D, I> {
         return getRepository().findAll(page).stream().toList();
     }
 
-    default List<D> findAllDto(Class<D> clazz) {
+    default List<D> findAllDTO(Class<D> clazz) {
         return getRepository().findAll().stream()
                 .map(model -> getMapper().map(model, clazz))
                 .toList();
     }
 
-    default List<D> findAllDto(Pageable page, Class<D> clazz) {
+    default List<D> findAllDTO(Pageable page, Class<D> clazz) {
         return getRepository().findAll(page).stream()
                 .map(model -> getMapper().map(model, clazz))
                 .toList();
+    }
+
+    default List<T> findByIds(List<I> ids) {
+        return getRepository().findAllById(ids);
     }
 
     default Optional<T> findById(I id) {
@@ -39,6 +43,12 @@ public interface GenericService<T extends BaseEntity, D, I> {
 
     default T save(T entity) {
         return getRepository().save(entity);
+    }
+
+    default D save(D dto, Class<T> modelClass, Class<D> dtoClass) {
+        T model = getMapper().map(dto, modelClass);
+        T saveModel = getRepository().save(model);
+        return getMapper().map(saveModel, dtoClass);
     }
 
     default void deleteById(I id) {
