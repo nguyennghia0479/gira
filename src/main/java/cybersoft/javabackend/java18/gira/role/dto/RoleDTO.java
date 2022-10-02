@@ -17,12 +17,10 @@ public class RoleDTO {
     private UUID id;
     @Size(min = 5, max = 100, message = "{role.name.size}")
     @NotBlank(message = "{role.name.blank}")
-//    @UniqueRoleName
     private String name;
 
     @Size(min = 3, max = 10, message = "{role.code.size}")
     @NotBlank(message = "{role.code.blank}")
-//    @UniqueRoleCode
     private String code;
 
     @NotBlank(message = "{role.description.blank}")
