@@ -46,10 +46,9 @@ public class Role extends BaseEntity {
         operation.getRoles().remove(this);
     }
 
-    public Role addOperation(Operation operation) {
+    public void addOperation(Operation operation) {
         this.operations.add(operation);
         operation.getRoles().add(this);
-        return this;
     }
 
     @Override
