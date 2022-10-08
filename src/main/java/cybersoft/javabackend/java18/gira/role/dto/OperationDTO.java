@@ -1,6 +1,7 @@
 package cybersoft.javabackend.java18.gira.role.dto;
 
 import cybersoft.javabackend.java18.gira.role.model.Operation;
+import cybersoft.javabackend.java18.gira.role.validation.annotation.UniqueOperationName;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -14,11 +15,13 @@ import java.util.UUID;
 @AllArgsConstructor
 public class OperationDTO {
     private UUID id;
-    @Size(min = 5, max = 100, message = "{service.name.size}")
-    @NotBlank(message = "{service.name.blank}")
+
+    @Size(min = 5, max = 100, message = "{operation.name.size}")
+    @NotBlank(message = "{operation.name.blank}")
+    @UniqueOperationName
     private String name;
 
-    @NotBlank(message = "{service.description.blank}")
+    @NotBlank(message = "{operation.description.blank}")
     private String description;
 
     private Operation.Type type;

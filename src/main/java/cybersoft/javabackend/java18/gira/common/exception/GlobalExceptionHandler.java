@@ -17,7 +17,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ResponseDTO> handlerConstraintViolationException(ConstraintViolationException exception) {
-
         return ResponseUtils.error(exception, HttpStatus.BAD_REQUEST);
     }
 

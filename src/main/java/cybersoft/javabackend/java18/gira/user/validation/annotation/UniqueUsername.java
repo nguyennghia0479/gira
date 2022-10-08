@@ -1,6 +1,6 @@
-package cybersoft.javabackend.java18.gira.role.validation.annotation;
+package cybersoft.javabackend.java18.gira.user.validation.annotation;
 
-import cybersoft.javabackend.java18.gira.role.validation.validator.UniqueRoleNameValidator;
+import cybersoft.javabackend.java18.gira.user.validation.validator.UniqueUsernameValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,11 +9,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = UniqueRoleNameValidator.class)
+@Constraint(validatedBy = UniqueUsernameValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface UniqueRoleName {
-    String message() default "Role name is existed.";
+public @interface UniqueUsername {
+    String message() default "{user.username.existed}";
 
     Class<?>[] groups() default {};
 

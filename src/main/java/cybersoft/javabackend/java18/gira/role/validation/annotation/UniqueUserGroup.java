@@ -1,6 +1,6 @@
 package cybersoft.javabackend.java18.gira.role.validation.annotation;
 
-import cybersoft.javabackend.java18.gira.role.validation.validator.UniqueRoleCodeValidator;
+import cybersoft.javabackend.java18.gira.role.validation.validator.UniqueUserGroupValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,11 +9,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = UniqueRoleCodeValidator.class)
+@Constraint(validatedBy = UniqueUserGroupValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface UniqueRoleCode {
-    String message() default "Role code is existed.";
+@Target(ElementType.TYPE)
+public @interface UniqueUserGroup {
+    String message() default "{usergroup.unique.existed}";
 
     Class<?>[] groups() default {};
 
