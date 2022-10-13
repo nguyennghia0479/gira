@@ -13,6 +13,9 @@ public interface UserGroupRepository extends JpaRepository<UserGroup, UUID> {
     @Query("select ug from UserGroup ug left join fetch ug.users")
     List<UserGroup> findAllWithUsers();
 
+    @Query("select ug from UserGroup ug left join fetch ug.roles")
+    List<UserGroup> findAllWithRoles();
+
     @Query("select (count(u) > 0) from UserGroup u where u.name = ?1")
     boolean existsByName(String name);
 

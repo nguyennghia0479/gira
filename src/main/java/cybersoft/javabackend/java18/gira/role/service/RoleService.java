@@ -26,6 +26,8 @@ public interface RoleService extends GenericService<Role, RoleDTO, UUID> {
     RoleDTO save(RoleDTO dto);
 
     RoleWithOperationDTO addOperation(UUID roleId, List<UUID> ids);
+
+    List<RoleWithOperationDTO> findAllDtoIncludeOperations();
 }
 
 @Service
@@ -76,6 +78,15 @@ class RoleServiceImpl implements RoleService {
         List<Operation> operations = service.findByIds(ids);
         operations.forEach(curRole::addOperation);
         return mapper.map(curRole, RoleWithOperationDTO.class);
+    }
+
+    @Override
+    public List<RoleWithOperationDTO> findAllDtoIncludeOperations() {
+        return repository.findAllWithOperations()
+                .stream()
+                .distinct()
+                .map(model -> mapper.map(model, RoleWithOperationDTO.class))
+                .toList();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package cybersoft.javabackend.java18.gira.role.model;
 
 import cybersoft.javabackend.java18.gira.common.model.BaseEntity;
+import cybersoft.javabackend.java18.gira.user.model.UserEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,6 +41,9 @@ public class Role extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = RoleEntity.RoleMappedOperation.JOIN_TABLE_OPERATION_ID)
     )
     private Set<Operation> operations = new LinkedHashSet<>();
+
+    @ManyToMany(mappedBy = UserEntity.UserGroupMappedRole.ROLE_MAPPED_USER_GROUP)
+    private Set<UserGroup> userGroups = new LinkedHashSet<>();
 
     public void removeOperation(Operation operation) {
         this.operations.remove(operation);

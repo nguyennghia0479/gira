@@ -5,6 +5,14 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class UserEntity {
     @UtilityClass
+    public static class UserGroupMappedRole {
+        public static final String ROLE_MAPPED_USER_GROUP = "roles";
+        public static final String JOIN_TABLE = "G_USER_GROUP_ROLE";
+        public static final String JOIN_TABLE_ROLE_ID = "G_ROLE_ID";
+        public static final String JOIN_TABLE_USER_GROUP_ID = "G_USER_GROUP_ID";
+    }
+
+    @UtilityClass
     public class UserGroupMappedUser {
         public static final String USER_MAPPED_USER_GROUP = "users";
         public static final String JOIN_TABLE = "G_USER_GROUP_USER";

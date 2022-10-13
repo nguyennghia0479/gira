@@ -26,6 +26,12 @@ public class GlobalExceptionHandler {
         return ResponseUtils.error(exception, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(GiraBussinessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ResponseDTO> handlerGiraBussinessException(GiraBussinessException exception) {
+        return ResponseUtils.error(exception, HttpStatus.BAD_REQUEST);
+    }
+
 //    @ExceptionHandler(RuntimeException.class)
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
 //    public ResponseEntity<ResponseDTO> handleGlobal(RuntimeException exception) {

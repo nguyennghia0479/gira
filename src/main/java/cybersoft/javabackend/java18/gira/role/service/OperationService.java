@@ -33,5 +33,4 @@ class OperationServiceImpl implements OperationService {
     public ModelMapper getMapper() {
         return mapper;
     }
-
 }

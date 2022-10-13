@@ -41,9 +41,22 @@ public class UserGroup extends BaseEntity {
     )
     private Set<User> users = new LinkedHashSet<>();
 
+   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+   @JoinTable(
+           name = UserEntity.UserGroupMappedRole.JOIN_TABLE,
+           joinColumns = @JoinColumn(name = UserEntity.UserGroupMappedRole.JOIN_TABLE_USER_GROUP_ID),
+           inverseJoinColumns = @JoinColumn(name = UserEntity.UserGroupMappedRole.JOIN_TABLE_ROLE_ID)
+   )
+    private Set<Role> roles = new LinkedHashSet<>();
+
     public void addUser(User user) {
         this.users.add(user);
         user.getUserGroups().add(this);
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+        role.getUserGroups().add(this);
     }
 
     @Override
